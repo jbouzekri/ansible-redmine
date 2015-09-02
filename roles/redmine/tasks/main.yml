@@ -1,0 +1,85 @@
+---
+- name: install required package for redmine
+  apt: pkg={{ item }}
+  with_items:
+    - libmagickwand-dev
+    - imagemagick
+
+- name: create user redmine
+  user: name={{ redmine_user }}
+        shell=/usr/sbin/nologin
+        groups=rvm
+        append=yes
+        generate_ssh_key=yes
+
+- name: checkout latest version of redmine
+  git: repo=https://github.com/redmine/redmine.git
+       dest={{ redmine_home }}
+       version={{ redmine_version }}
+  become_user: "{{ redmine_user }}"
+
+- name: set permission on redmine src
+  file: path={{ redmine_home }}
+        state=directory
+        owner={{ redmine_user }}
+        group={{ redmine_user }}
+        recurse=yes mode=0755
+
+- name: create database redmine
+  mysql_db: name=redmine
+            encoding=utf8
+            login_user=root
+            login_password={{ mysql_root_password }}
+
+- name: create mysql user for redmine
+  mysql_user: name=redmine
+              password={{ redmine_mysql_password }}
+              login_user=root
+              login_password={{ mysql_root_password }}
+              priv=redmine.*:ALL
+
+- name: redmine database config
+  template: src=database.yml.j2
+            dest=/home/redmine/src/config/database.yml
+
+- name: redmine bundler install dependencies
+  command: bundle install --without development test
+           chdir={{ redmine_home }}
+
+- name: generate session store secret
+  command: rake generate_secret_token
+           RAILS_ENV=production
+           chdir={{ redmine_home }}
+  become_user: "{{ redmine_user }}"
+
+- name: database migrations
+  command: rake
+           RAILS_ENV=production
+           db:migrate
+           chdir={{ redmine_home }}
+  become_user: "{{ redmine_user }}"
+
+- name: load default dataset
+  command: rake
+           RAILS_ENV=production
+           REDMINE_LANG={{ redmine_lang }}
+           redmine:load_default_data
+           chdir={{ redmine_home }}
+  become_user: "{{ redmine_user }}"
+
+- name: create plugin assets directory
+  file: path={{ redmine_home }}/public/plugin_assets
+        state=directory
+  become_user: "{{ redmine_user }}"
+
+- name: set write permission on redmine folder
+  file: path={{ redmine_home }}/{{ item }}
+        state=directory
+        owner={{ redmine_user }}
+        group={{ redmine_user }}
+        recurse=yes mode=0755
+  with_items:
+    - "files"
+    - "log"
+    - "tmp"
+    - "public/plugin_assets"

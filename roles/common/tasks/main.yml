@@ -6,6 +6,13 @@
   apt: pkg={{ item }} state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
   with_items:
     - curl
+    - git
+    - build-essential
+    - libssl-dev
+    - libcurl4-openssl-dev
+    - libreadline-dev
+    - libmysqlclient-dev
+    - ruby-dev
 
 - name: apt upgrade
   apt: upgrade=yes

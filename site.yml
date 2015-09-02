@@ -6,5 +6,6 @@
       - ntp
       - rvm-ruby
       - mysql
+      - redmine
     vars_files:
       - vars/all.yml
