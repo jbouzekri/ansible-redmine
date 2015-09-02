@@ -8,7 +8,6 @@
 - name: create user redmine
   user: name={{ redmine_user }}
         shell=/usr/sbin/nologin
-        groups=rvm
         append=yes
         generate_ssh_key=yes
 

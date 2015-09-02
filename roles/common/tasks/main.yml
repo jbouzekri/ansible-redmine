@@ -13,6 +13,30 @@
     - libreadline-dev
     - libmysqlclient-dev
     - ruby-dev
+    - gcc
+    - zlib1g
+    - zlib1g-dev
+    - zlibc
+    - ruby-zip
+    - libssl-dev
+    - libyaml-dev
+    - libcurl4-openssl-dev
+    - ruby
+    - gem
+    - libapache2-mod-passenger
+    - apache2-mpm-prefork
+    - apache2-dev
+    - libapr1-dev
+    - libxslt1-dev
+    - checkinstall
+    - libxml2-dev
+    - ruby-dev
+    - vim
+    - libmagickwand-dev
+    - imagemagick
 
 - name: apt upgrade
   apt: upgrade=yes
+
+- name: install bundler
+  command: gem install bundler

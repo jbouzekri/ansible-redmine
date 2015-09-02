@@ -1,6 +1,6 @@
 # Redmine Playbook
 
-An ansible playbook to install redmine on a Debian production server
+An ansible playbook to install redmine on a Debian production server. It has been tested on Debian 8.
 
 ## Introduction
 

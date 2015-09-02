@@ -4,7 +4,6 @@
     roles:
       - common
       - ntp
-      - rvm-ruby
       - mysql
       - redmine
     vars_files:
