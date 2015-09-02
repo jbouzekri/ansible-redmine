@@ -1,0 +1,6 @@
+[submodule "roles/ntp"]
+	path = roles/ntp
+	url = https://github.com/resmo/ansible-role-ntp.git
+[submodule "roles/rvm-ruby"]
+	path = roles/rvm-ruby
+	url = https://github.com/rvm/rvm1-ansible.git

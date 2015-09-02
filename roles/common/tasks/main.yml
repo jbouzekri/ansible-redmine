@@ -1,0 +1,11 @@
+---
+- name: apt update
+  apt: update_cache=yes cache_valid_time={{ apt_cache_valid_time }}
+
+- name: add mandatory packages
+  apt: pkg={{ item }} state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
+  with_items:
+    - curl
+
+- name: apt upgrade
+  apt: upgrade=yes
