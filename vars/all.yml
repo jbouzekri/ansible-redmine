@@ -1,9 +1,0 @@
-apt_cache_valid_time: 3600
-rvm1_gpg_key_server: "hkp://pgp.mit.edu"
-mysql_root_password: ''
-
-redmine_user: redmine
-redmine_home: /home/{{ redmine_user }}/src
-redmine_lang: fr
-redmine_version: 3.1.0
-redmine_mysql_password: 'redmine'

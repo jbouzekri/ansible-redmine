@@ -15,6 +15,7 @@
   git: repo=https://github.com/redmine/redmine.git
        dest={{ redmine_home }}
        version={{ redmine_version }}
+       update=no
   become_user: "{{ redmine_user }}"
 
 - name: set permission on redmine src
@@ -40,6 +41,10 @@
 - name: redmine database config
   template: src=database.yml.j2
             dest=/home/redmine/src/config/database.yml
+
+- name: redmine email configuration
+  template: src=configuration.yml.j2
+            dest=/home/redmine/src/config/configuration.yml
 
 - name: redmine bundler install dependencies
   command: bundle install --without development test
@@ -70,15 +75,3 @@
   file: path={{ redmine_home }}/public/plugin_assets
         state=directory
   become_user: "{{ redmine_user }}"
-
-- name: set write permission on redmine folder
-  file: path={{ redmine_home }}/{{ item }}
-        state=directory
-        owner={{ redmine_user }}
-        group={{ redmine_user }}
-        recurse=yes mode=0755
-  with_items:
-    - "files"
-    - "log"
-    - "tmp"
-    - "public/plugin_assets"

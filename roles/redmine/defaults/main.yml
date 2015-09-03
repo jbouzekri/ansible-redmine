@@ -1,0 +1,13 @@
+---
+redmine_host: 'redmine.myhost.fr'
+redmine_user: redmine
+redmine_home: /home/{{ redmine_user }}/src
+redmine_lang: fr
+redmine_version: 3.1.0
+redmine_mysql_password: 'redmine'
+
+redmine_email_delivery_method: :smtp
+redmine_email_smtp_enable_starttls_auto: true
+redmine_email_smtp_address: smtp.mandrillapp.com
+redmine_email_smtp_port: 587
+redmine_email_smtp_authentication: :login

@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+    ServerName {{ redmine_host }}
+
+    DocumentRoot {{ redmine_home }}/public
+    DirectoryIndex app.php
+
+    <Directory {{ redmine_home }}/public>
+        RailsEnv production
+        RackBaseURI /
+        Options -MultiViews
+
+        # enable the .htaccess rewrites
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/apache2/error-redmine.log
+    CustomLog /var/log/apache2/access-redmine.log combined
+</VirtualHost>

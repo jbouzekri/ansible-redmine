@@ -1,2 +1,10 @@
 [redmine]
 192.168.56.101
+
+[redmine:vars]
+redmine_host=redmine.myhost.fr
+redmine_mysql_password=redminemysqlpass
+mysql_root_password=''
+redmine_email_smtp_domain=myhost.fr
+redmine_email_smtp_user_name=redmine@myhost.fr
+redmine_email_smtp_password=mypassword

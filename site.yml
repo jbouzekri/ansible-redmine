@@ -1,10 +1,9 @@
 ---
-  - hosts: all
-    sudo: yes
-    roles:
-      - common
-      - ntp
-      - mysql
-      - redmine
-    vars_files:
-      - vars/all.yml
+- hosts: all
+  sudo: yes
+  roles:
+    - common
+    - ntp
+    - mysql
+    - redmine
+    - apache

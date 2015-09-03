@@ -1,0 +1,11 @@
+production:
+  email_delivery:
+    delivery_method: {{ redmine_email_delivery_method }}
+    smtp_settings:
+      enable_starttls_auto: {{ redmine_email_smtp_enable_starttls_auto }}
+      address: {{ redmine_email_smtp_address }}
+      port: {{ redmine_email_smtp_port }}
+      domain: {{ redmine_email_smtp_domain }}
+      authentication: {{ redmine_email_smtp_authentication }}
+      user_name: {{ redmine_email_smtp_user_name }}
+      password: {{ redmine_email_smtp_password }}
